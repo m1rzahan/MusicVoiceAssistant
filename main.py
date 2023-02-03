@@ -12,7 +12,7 @@ class InvalidSearchError(Exception):
     pass
 
 
-setup = pd.read_csv(r'req', sep='=', index_col=0, squeeze=True, header=None)
+setup = pd.read_csv(r'spotifyInformations', sep='=', index_col=0, squeeze=True, header=None)
 client_id = setup['client_id']
 client_secret = setup['client_secret']
 device_name = setup['device_name']
