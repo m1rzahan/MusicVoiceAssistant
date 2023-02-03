@@ -71,8 +71,6 @@ with sr.Microphone() as source:
             formatted_url = playSoundCloud(text)
             open_url_in_browser(formatted_url)
         elif "Spotify" in text:
-            subprocess.call("spotify")
-            time.sleep(3)
 
             uri = get_track_uri(spotify=spotify, name=text)
             play_track(spotify=spotify, device_id=deviceID, uri=uri)

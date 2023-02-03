@@ -1,0 +1,6 @@
+client_id=YOUR_CLIENT_ID
+client_secret=YOUR_SECRET_KEY
+device_name=YOUR_DEVICE_NAME
+redirect_uri=https://example.com/callback/
+username=YOUR_USER_NAME
+scope=user-read-private user-read-playback-state user-modify-playback-state
