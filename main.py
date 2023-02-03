@@ -1,5 +1,3 @@
-import time
-import subprocess
 import pandas as pd
 import speech_recognition as sr
 import spotipy as sp
@@ -8,8 +6,11 @@ from spotipy.oauth2 import SpotifyOAuth
 import pyttsx3
 import pywhatkit
 import webbrowser
+
+
 class InvalidSearchError(Exception):
     pass
+
 
 setup = pd.read_csv(r'req', sep='=', index_col=0, squeeze=True, header=None)
 client_id = setup['client_id']
@@ -36,11 +37,17 @@ for d in devices['devices']:
     if d['name'] == device_name:
         deviceID = d['id']
         break
+
+
 def playSoundCloud(text):
     return "https://soundcloud.com/search?q=" + text.replace(" ", "+")
+
+
 def open_url_in_browser(url):
 
     webbrowser.open(url)
+
+
 def get_track_uri(spotify: Spotify, name: str) -> str:
 
     original = name
@@ -51,19 +58,21 @@ def get_track_uri(spotify: Spotify, name: str) -> str:
         raise InvalidSearchError(f'No track named "{original}"')
     track_uri = results['tracks']['items'][0]['uri']
     return track_uri
+
+
 def play_track(spotify=None, device_id=None, uri=None):
     spotify.start_playback(device_id=device_id, uris=[uri])
 
 
-r=sr.Recognizer()
+r = sr.Recognizer()
 print(sr.Microphone.list_microphone_names())
 with sr.Microphone() as source:
-    r.adjust_for_ambient_noise(source,duration=1)
+    r.adjust_for_ambient_noise(source, duration=1)
 
     print("say anything : ")
-    audio= r.listen(source)
+    audio = r.listen(source)
     try:
-        text = r.recognize_google(audio,language="en")
+        text = r.recognize_google(audio, language="en")
         print(text)
         if "YouTube" in text:
             pywhatkit.playonyt(text)
